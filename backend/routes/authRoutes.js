@@ -3,20 +3,20 @@ const router = express.Router();
 const {
   loginFaculty,
   loginAdmin,
+  signupFaculty,
+  signupAdmin,
   resetFacultyPassword,
   resetAdminPassword,
 } = require("../controllers/authController");
 
-// Faculty login
+// Faculty routes
 router.post("/faculty/login", loginFaculty);
-
-// Admin login
-router.post("/admin/login", loginAdmin);
-
-// Faculty password reset
+router.post("/faculty/signup", signupFaculty);
 router.post("/faculty/reset-password", resetFacultyPassword);
 
-// Admin password reset
+// Admin routes
+router.post("/admin/login", loginAdmin);
+router.post("/admin/signup", signupAdmin);
 router.post("/admin/reset-password", resetAdminPassword);
 
 module.exports = router;

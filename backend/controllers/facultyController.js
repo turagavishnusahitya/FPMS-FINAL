@@ -1,6 +1,8 @@
 const bcrypt = require("bcryptjs");
 const {
   upsertProofSubmission,
+  saveDraftSubmission,
+  deleteFacultySubmission,
   getFacultySubmission,
   getFacultyById,
 } = require("../models/facultyModel");
@@ -29,16 +31,43 @@ const loginFaculty = async (req, res) => {
   }
 };
 
-// Faculty proof submission controller
+// Faculty proof submission controller (final submit)
 const submitProof = async (req, res) => {
   const { faculty_id, year, ...proofData } = req.body;
 
   try {
-    await upsertProofSubmission(faculty_id, year, proofData);
+    await upsertProofSubmission(faculty_id, year, { ...proofData, is_draft: false });
     res.json({ message: "Proof submission successful" });
   } catch (err) {
     console.error("Proof submission error:", err);
     res.status(500).json({ message: "Error submitting proof" });
+  }
+};
+
+// Faculty save draft controller
+const saveDraft = async (req, res) => {
+  const { faculty_id, year, ...proofData } = req.body;
+
+  try {
+    await saveDraftSubmission(faculty_id, year, proofData);
+    res.json({ message: "Draft saved successfully" });
+  } catch (err) {
+    console.error("Save draft error:", err);
+    res.status(500).json({ message: "Error saving draft" });
+  }
+};
+
+// Faculty delete submission controller
+const deleteSubmission = async (req, res) => {
+  const { faculty_id } = req.params;
+  const year = parseInt(req.query.year);
+
+  try {
+    await deleteFacultySubmission(faculty_id, year);
+    res.json({ message: "Submission deleted successfully" });
+  } catch (err) {
+    console.error("Delete submission error:", err);
+    res.status(500).json({ message: "Error deleting submission" });
   }
 };
 
@@ -62,5 +91,7 @@ const getProofSubmission = async (req, res) => {
 module.exports = {
   loginFaculty,
   submitProof,
+  saveDraft,
+  deleteSubmission,
   getProofSubmission,
 };

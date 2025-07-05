@@ -154,9 +154,12 @@ const LoginPage = () => {
                   'Sign In'
                 )}
               </button>
-              <div className="text-center">
-                <Link to="/faculty/forgot-password" className="text-blue-600 hover:text-blue-800 text-sm font-medium transition duration-200">
+              <div className="text-center space-y-2">
+                <Link to="/faculty/forgot-password" className="block text-blue-600 hover:text-blue-800 text-sm font-medium transition duration-200">
                   Forgot Password?
+                </Link>
+                <Link to="/signup" className="block text-blue-600 hover:text-blue-800 text-sm font-medium transition duration-200">
+                  Create Faculty Account
                 </Link>
               </div>
             </form>
@@ -216,9 +219,12 @@ const LoginPage = () => {
                   'Sign In'
                 )}
               </button>
-              <div className="text-center">
-                <Link to="/admin/forgot-password" className="text-green-600 hover:text-green-800 text-sm font-medium transition duration-200">
+              <div className="text-center space-y-2">
+                <Link to="/admin/forgot-password" className="block text-green-600 hover:text-green-800 text-sm font-medium transition duration-200">
                   Forgot Password?
+                </Link>
+                <Link to="/signup" className="block text-green-600 hover:text-green-800 text-sm font-medium transition duration-200">
+                  Create Admin Account
                 </Link>
               </div>
             </form>

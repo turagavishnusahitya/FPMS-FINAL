@@ -2,11 +2,13 @@ const bcrypt = require("bcryptjs");
 const {
   findFacultyById,
   findFacultyByIdAndCode,
+  createFacultyUser,
 } = require("../models/facultyModel");
 const {
   findAdminById,
   verifyAdminSecurityCode,
   updateAdminPassword,
+  createAdminUser,
 } = require("../models/adminModel");
 
 const pool = require("../models/db");
@@ -43,6 +45,67 @@ const loginAdmin = async (req, res) => {
     res.json({ message: "Admin login successful" });
   } catch (err) {
     console.error("Admin login error:", err);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+// 📝 Faculty Signup
+const signupFaculty = async (req, res) => {
+  const { login_id, password, security_code, full_name, department, email } = req.body;
+
+  try {
+    // Check if faculty already exists
+    const existingFaculty = await findFacultyById(login_id);
+    if (existingFaculty) {
+      return res.status(400).json({ message: "Faculty ID already exists" });
+    }
+
+    // Hash password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Create faculty user
+    await createFacultyUser({
+      login_id,
+      password_hash: hashedPassword,
+      security_code,
+      full_name,
+      department,
+      email
+    });
+
+    res.status(201).json({ message: "Faculty account created successfully" });
+  } catch (err) {
+    console.error("Faculty signup error:", err);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+// 📝 Admin Signup
+const signupAdmin = async (req, res) => {
+  const { admin_id, password, security_code, full_name, email } = req.body;
+
+  try {
+    // Check if admin already exists
+    const existingAdmin = await findAdminById(admin_id);
+    if (existingAdmin) {
+      return res.status(400).json({ message: "Admin ID already exists" });
+    }
+
+    // Hash password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Create admin user
+    await createAdminUser({
+      admin_id,
+      password_hash: hashedPassword,
+      security_code,
+      full_name,
+      email
+    });
+
+    res.status(201).json({ message: "Admin account created successfully" });
+  } catch (err) {
+    console.error("Admin signup error:", err);
     res.status(500).json({ message: "Server error" });
   }
 };
@@ -95,6 +158,8 @@ const resetAdminPassword = async (req, res) => {
 module.exports = {
   loginFaculty,
   loginAdmin,
+  signupFaculty,
+  signupAdmin,
   resetFacultyPassword,
   resetAdminPassword,
 };

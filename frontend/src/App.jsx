@@ -2,19 +2,21 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import LoginPage from './components/LoginPage';
+import SignupPage from './components/SignupPage';
 import FacultyDashboard from './components/FacultyDashboard';
 import AdminDashboard from './components/AdminDashboard';
 import ProtectedRoute from './components/ProtectedRoute';
 
-import ForgotPassword from './components/ForgotPassword';       // Faculty forgot password
-import AdminForgotPassword from './components/AdminForgotPassword'; // Admin forgot password
+import ForgotPassword from './components/ForgotPassword';
+import AdminForgotPassword from './components/AdminForgotPassword';
 
 function App() {
   return (
     <Router>
       <Routes>
-        {/* Public route */}
+        {/* Public routes */}
         <Route path="/" element={<LoginPage />} />
+        <Route path="/signup" element={<SignupPage />} />
 
         {/* Password reset routes */}
         <Route path="/faculty/forgot-password" element={<ForgotPassword />} />

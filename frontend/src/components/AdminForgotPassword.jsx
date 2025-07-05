@@ -12,7 +12,7 @@ const AdminForgotPassword = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const res = await fetch('http://localhost:5000/api/auth/admin/reset-password', {
+    const res = await fetch('http://localhost:3001/api/auth/admin/reset-password', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -82,4 +82,3 @@ const AdminForgotPassword = () => {
 };
 
 export default AdminForgotPassword;
-

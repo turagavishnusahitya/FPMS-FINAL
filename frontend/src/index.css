@@ -1,0 +1,10 @@
+/* index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Optional global tweaks */
+body {
+  background-color: #f9fafb; /* light gray */
+  font-family: 'Inter', sans-serif; /* Optional if you've set up a font */
+}

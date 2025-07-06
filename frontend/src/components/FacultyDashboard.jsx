@@ -20,7 +20,7 @@ const FacultyDashboard = () => {
     if (!facultyId) return;
     const fetchData = async () => {
       try {
-        const res = await fetch(`http://localhost:3001/api/faculty/proof/${facultyId}?year=${currentYear}`);
+        const res = await fetch(`http://localhost:3000/api/faculty/proof/${facultyId}?year=${currentYear}`);
         const data = await res.json();
         if (res.ok && data) {
           setFormData(data);
@@ -43,7 +43,7 @@ const FacultyDashboard = () => {
   const handleSaveDraft = async () => {
     setLoading(true);
     try {
-      const res = await fetch('http://localhost:3001/api/faculty/save-draft', {
+      const res = await fetch('http://localhost:3000/api/faculty/save-draft', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ faculty_id: facultyId, year: currentYear, ...formData }),
@@ -67,7 +67,7 @@ const FacultyDashboard = () => {
   const handleSubmit = async () => {
     setLoading(true);
     try {
-      const res = await fetch('http://localhost:3001/api/faculty/submit', {
+      const res = await fetch('http://localhost:3000/api/faculty/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ faculty_id: facultyId, year: currentYear, ...formData }),
@@ -92,7 +92,7 @@ const FacultyDashboard = () => {
   const handleDelete = async () => {
     setLoading(true);
     try {
-      const res = await fetch(`http://localhost:3001/api/faculty/submission/${facultyId}?year=${currentYear}`, {
+      const res = await fetch(`http://localhost:3000/api/faculty/submission/${facultyId}?year=${currentYear}`, {
         method: 'DELETE',
       });
       const data = await res.json();

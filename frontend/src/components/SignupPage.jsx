@@ -50,7 +50,7 @@ const SignupPage = () => {
     }
 
     try {
-      const res = await fetch('http://localhost:3001/api/auth/faculty/signup', {
+      const res = await fetch('http://localhost:3000/api/auth/faculty/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -80,7 +80,7 @@ const SignupPage = () => {
       }
     } catch (err) {
       console.error(err);
-      setError('Server error - Please check if backend is running on port 3001');
+      setError('Server error - Please check if backend is running on port 3000');
     } finally {
       setLoading(false);
     }
@@ -99,7 +99,7 @@ const SignupPage = () => {
     }
 
     try {
-      const res = await fetch('http://localhost:3001/api/auth/admin/signup', {
+      const res = await fetch('http://localhost:3000/api/auth/admin/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -127,7 +127,7 @@ const SignupPage = () => {
       }
     } catch (err) {
       console.error(err);
-      setError('Server error - Please check if backend is running on port 3001');
+      setError('Server error - Please check if backend is running on port 3000');
     } finally {
       setLoading(false);
     }

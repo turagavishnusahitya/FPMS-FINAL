@@ -17,7 +17,7 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchFaculty = async () => {
       try {
-        const res = await fetch('http://localhost:3001/api/admin/faculty-submissions');
+        const res = await fetch('http://localhost:3000/api/admin/faculty-submissions');
         const data = await res.json();
         setFacultyList(data);
       } catch (err) {
@@ -31,7 +31,7 @@ const AdminDashboard = () => {
     setSelectedFaculty(faculty_id);
     setLoading(true);
     try {
-      const res = await fetch(`http://localhost:3001/api/admin/proofs/${faculty_id}?year=${currentYear}`);
+      const res = await fetch(`http://localhost:3000/api/admin/proofs/${faculty_id}?year=${currentYear}`);
       const data = await res.json();
       setProofData(data || {});
       setScores({});
@@ -58,7 +58,7 @@ const AdminDashboard = () => {
     };
 
     try {
-      const res = await fetch('http://localhost:3001/api/admin/submit-score', {
+      const res = await fetch('http://localhost:3000/api/admin/submit-score', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),

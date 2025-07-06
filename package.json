@@ -3,13 +3,19 @@
   "version": "1.0.0",
   "description": "Faculty Performance Evaluation System",
   "scripts": {
-    "dev": "npm run dev --prefix frontend",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
     "dev:backend": "npm run dev --prefix backend",
     "dev:frontend": "npm run dev --prefix frontend",
+    "start:backend": "npm start --prefix backend",
+    "start:frontend": "npm run build --prefix frontend && npm run preview --prefix frontend",
     "install:all": "npm install && npm install --prefix backend && npm install --prefix frontend",
-    "start": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\""
+    "build": "npm run build --prefix frontend",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"
+  },
+  "engines": {
+    "node": ">=16.0.0"
   }
 }
